@@ -27,12 +27,16 @@ if uploaded_file is not None:
     st.title('Pré-visualizar tabela')
     st.dataframe(df)
 
-    selected_column = st.selectbox('Qual coluna você deseja usar para separar os arquivos?', df.columns)
+    selected_column = st.selectbox('**Qual coluna você deseja usar para separar os arquivos?**', df.columns)
     if selected_column:
         output_list = df[selected_column].unique()
         output_count = len(output_list)
         output_filenames = [str(limpar_nome_arquivo(filename)) + ".xlsx" for filename in output_list]
-        st.markdown(f'Serão criados **{output_count}** arquivos no formato Excel.')
+
+        if output_count < 50:
+            st.info(f'Serão criados **{output_count}** arquivos no formato Excel.', icon="ℹ️")
+        else:
+            st.warning(f'Serão criados **{output_count}** arquivos no formato Excel. Isso deve demorar um tempo, tem certeza que deseja continuar?', icon="⚠️")
 
         with st.expander('Expanda para ver os arquivos'):
             st.table(output_filenames)
