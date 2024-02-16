@@ -1,3 +1,6 @@
-streamlit==1.31.0
-pandas==1.4.1
-openpyxl==3.0.10
+streamlit
+pandas
+openpyxl
+io
+zipfile
+re
